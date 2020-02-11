@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: zipkin-service
+  labels:
+    run: zipkin-server
+spec:
+  ports:
+  - port: 6666
+    protocol: TCP
+    targetPort: 6666
+    nodePort: 30666
+  selector:
+    run: zipkin-service
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: zipkin-service
+  labels:
+    run: zipkin-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: zipkin-service
+    spec:
+      containers:
+      - name: zipkin-service
+        image: art.local:8081/docker/notebook-microservices-k8s/zipkin-service:latest
+        ports:
+        - containerPort: 6666
+          protocol: TCP
+      imagePullSecrets:
+      - name: regcred-local
+#TODO fix k8s

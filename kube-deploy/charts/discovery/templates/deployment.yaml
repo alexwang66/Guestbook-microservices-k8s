@@ -1,0 +1,76 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "discovery.name" . }}
+  labels:
+    run: {{ template "discovery.name" . }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: {{ template "discovery.name" . }}
+    spec:
+      containers:
+        - name: discovery-service
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.service.port}}
+              protocol: TCP
+      imagePullSecrets:
+        - name: regcred-local
+
+
+#apiVersion: apps/v1beta2
+#kind: Deployment
+#metadata:
+#  name: {{ template "discovery.fullname" . }}
+#  labels:
+#    app: {{ template "discovery.name" . }}
+#    chart: {{ template "discovery.chart" . }}
+#    release: {{ .Release.Name }}
+#    heritage: {{ .Release.Service }}
+#spec:
+#  replicas: {{ .Values.replicaCount }}
+#  selector:
+#    matchLabels:
+#      app: {{ template "discovery.name" . }}
+#      release: {{ .Release.Name }}
+#  template:
+#    metadata:
+#      labels:
+#        app: {{ template "discovery.name" . }}
+#        release: {{ .Release.Name }}
+#    spec:
+#      containers:
+#        - name: {{ .Chart.Name }}
+#          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+#          imagePullPolicy: {{ .Values.image.pullPolicy }}
+#          ports:
+#            - name: http
+#              containerPort: 8761
+#              protocol: TCP
+#          livenessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+#          readinessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+#          resources:
+#{{ toYaml .Values.resources | indent 12 }}
+#    {{- with .Values.nodeSelector }}
+#        imagePullSecrets:
+#        - name: regcred-local
+#      nodeSelector:
+#{{ toYaml . | indent 8 }}
+#    {{- end }}
+#    {{- with .Values.affinity }}
+#      affinity:
+#{{ toYaml . | indent 8 }}
+#    {{- end }}
+#    {{- with .Values.tolerations }}
+#      tolerations:
+#{{ toYaml . | indent 8 }}
+#    {{- end }}

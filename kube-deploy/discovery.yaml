@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: eureka-server
+  namespace: default
+  labels:
+    run: eureka-server
+spec:
+  ports:
+    - name: port1
+      protocol: TCP
+      port: 8761
+      nodePort: 31002
+  selector:
+    run: eureka-server
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: eureka-server
+  labels:
+    run: eureka-server
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: eureka-server
+    spec:
+      containers:
+      - name: discovery-service
+        image: art.local:8081/docker/notebook-microservices-k8s/discovery-service:latest
+        ports:
+        - containerPort: 8761
+          protocol: TCP
+      imagePullSecrets:
+      - name: regcred-local
+

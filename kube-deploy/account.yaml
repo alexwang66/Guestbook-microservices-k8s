@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: account-service
+  labels:
+    run: account-server
+spec:
+  ports:
+    - name: port2
+      protocol: TCP
+      port: 2222
+      nodePort: 30222
+  selector:
+    run: account-service
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: account-service
+  labels:
+    run: account-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: account-service
+    spec:
+      containers:
+      - name: account-service
+        image: art.local:8081/docker/notebook-microservices-k8s/account-service:latest
+        ports:
+        - containerPort: 2222
+          protocol: TCP
+      imagePullSecrets:
+      - name: regcred-local

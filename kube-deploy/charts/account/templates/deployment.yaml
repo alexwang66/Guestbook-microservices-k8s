@@ -1,0 +1,74 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "account.name" . }}
+  labels:
+    run: {{ template "account.name" . }}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: {{ template "account.name" . }}
+    spec:
+      containers:
+        - name: {{ template "account.name" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.service.port }}
+              protocol: TCP
+      imagePullSecrets:
+        - name: regcred-local
+
+
+#apiVersion: apps/v1beta2
+#kind: Deployment
+#metadata:
+#  name: {{ template "account.fullname" . }}
+#  labels:
+#    app: {{ template "account.name" . }}
+#    chart: {{ template "account.chart" . }}
+#    release: {{ .Release.Name }}
+#    heritage: {{ .Release.Service }}
+#spec:
+#  replicas: {{ .Values.replicaCount }}
+#  selector:
+#    matchLabels:
+#      app: {{ template "account.name" . }}
+#      release: {{ .Release.Name }}
+#  template:
+#    metadata:
+#      labels:
+#        app: {{ template "account.name" . }}
+#        release: {{ .Release.Name }}
+#    spec:
+#      containers:
+#        - name: {{ .Chart.Name }}
+#          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+#          imagePullPolicy: {{ .Values.image.pullPolicy }}
+#          ports:
+#            - name: http
+#              containerPort: {{ .Values.service.port }}
+#              protocol: TCP
+#          livenessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+#          readinessProbe:
+#            httpGet:
+#              path: /
+#              port: http
+#          resources:
+#{{ toYaml .Values.resources | indent 12 }}
+#    {{- with .Values.nodeSelector }}
+#      nodeSelector:
+#{{ toYaml . | indent 8 }}
+#    {{- end }}
+#    {{- with .Values.affinity }}
+#      affinity:
+#{{ toYaml . | indent 8 }}
+#    {{- end }}
+#    {{- with .Values.tolerations }}
+#      tolerations:
+#{{ toYaml . | indent 8 }}
+#    {{- end }}

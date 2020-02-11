@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-service
+  labels:
+    run: gateway-server
+spec:
+  ports:
+    - name: port3
+      protocol: TCP
+      port: 8765
+      nodePort: 30333
+  selector:
+    run: gateway-service
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gateway-service
+  labels:
+    run: gateway-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: gateway-service
+    spec:
+      containers:
+      - name: gateway-service
+        image: art.local:8081/docker/notebook-microservices-k8s/gateway-service:latest
+        ports:
+        - containerPort: 8765
+          protocol: TCP
+      imagePullSecrets:
+      - name: regcred-local

@@ -1,0 +1,6 @@
+server:  
+  port: ${PORT:9411}
+
+spring:
+  application:
+    name: my-zipkin-server
