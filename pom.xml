@@ -23,6 +23,7 @@
         <module>account-service</module>
         <module>gateway-service</module>
         <module>customer-service</module>
+        <module>notebook-service</module>
         <module>zipkin-service</module>
         <module>config-service</module>
     </modules>

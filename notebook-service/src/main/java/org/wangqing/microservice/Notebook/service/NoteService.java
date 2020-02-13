@@ -1,6 +1,6 @@
-package org.surplus.radolf.Notebook.service;
+package org.wangqing.microservice.Notebook.service;
 
-import org.surplus.radolf.Notebook.entity.Note;
+import org.wangqing.microservice.Notebook.entity.Note;
 
 import java.util.List;
 

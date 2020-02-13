@@ -1,4 +1,4 @@
-package org.surplus.radolf.Notebook;
+package org.wangqing.microservice.Notebook;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

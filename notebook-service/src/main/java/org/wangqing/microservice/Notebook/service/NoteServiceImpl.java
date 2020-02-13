@@ -1,9 +1,9 @@
-package org.surplus.radolf.Notebook.service;
+package org.wangqing.microservice.Notebook.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.surplus.radolf.Notebook.entity.Note;
-import org.surplus.radolf.Notebook.repository.NoteRepository;
+import org.wangqing.microservice.Notebook.entity.Note;
+import org.wangqing.microservice.Notebook.repository.NoteRepository;
 
 import java.util.List;
 

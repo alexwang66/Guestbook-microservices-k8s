@@ -1,4 +1,4 @@
-package org.surplus.radolf.Notebook.entity;
+package org.wangqing.microservice.Notebook.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

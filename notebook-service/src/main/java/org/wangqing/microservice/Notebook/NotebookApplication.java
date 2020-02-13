@@ -1,4 +1,4 @@
-package org.surplus.radolf.Notebook;
+package org.wangqing.microservice.Notebook;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,7 +1,7 @@
-package org.surplus.radolf.Notebook.repository;
+package org.wangqing.microservice.Notebook.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.surplus.radolf.Notebook.entity.Note;
+import org.wangqing.microservice.Notebook.entity.Note;
 
 import java.util.List;
 
