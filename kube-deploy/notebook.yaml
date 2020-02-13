@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: notebook-service
+  labels:
+    run: notebook-server
+spec:
+  ports:
+    - name: port3
+      protocol: TCP
+      port: 5555
+      nodePort: 30555
+  selector:
+    run: notebook-service
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: notebook-service
+  labels:
+    run: notebook-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: notebook-service
+    spec:
+      containers:
+      - name: notebook-service
+        image: art.local:8081/docker-local/sample-spring-microservices/notebook-service:latest
+        ports:
+        - containerPort: 5555
+          protocol: TCP
+      imagePullSecrets:
+      - name: regcred-local
