@@ -1,3 +1,30 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: mysql-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -9,7 +36,7 @@ spec:
     targetPort: 3306
     nodePort: 32002
   selector:
-    app: mysql
+    run: mysql
   type: NodePort
 ---
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
@@ -19,16 +46,16 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: mysql
+      run: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mysql
+        run: mysql
     spec:
       containers:
-      - image: mysql:5.6
+      - image: art.local:8081/docker-local/mysql/mysql-server:5.6
         name: mysql
         env:
           # Use secret in real usage
@@ -44,3 +71,4 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-pv-claim
+

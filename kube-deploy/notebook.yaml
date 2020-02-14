@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: notebook-service
   labels:
-    run: notebook-server
+    run: notebook-service
 spec:
   ports:
     - name: port3
@@ -14,7 +14,7 @@ spec:
     run: notebook-service
   type: NodePort
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: notebook-service
@@ -22,16 +22,23 @@ metadata:
     run: notebook-service
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      run: notebook-service
   template:
     metadata:
       labels:
         run: notebook-service
     spec:
       containers:
-      - name: notebook-service
-        image: art.local:8081/docker-local/sample-spring-microservices/notebook-service:latest
-        ports:
-        - containerPort: 5555
-          protocol: TCP
+        - name: notebook-service
+          image: art.local:8081/docker-local/sample-spring-microservices/notebook-service:latest
+          env:
+            - name: MYSQL_SERVER
+              value: "192.168.99.100"
+            - name: MYSQL_PORT
+              value: "32002"
+          ports:
+            - containerPort: 5555
       imagePullSecrets:
       - name: regcred-local
