@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
         - name: notebook-service
-          image: art.local:8081/docker-local/sample-spring-microservices/notebook-service:latest
+          image: art.local:8081/docker-local/notebook-microservices-k8s/notebook-service:latest
           env:
             - name: MYSQL_SERVER
               value: "192.168.99.100"

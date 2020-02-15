@@ -6,9 +6,9 @@ metadata:
     run: zipkin-server
 spec:
   ports:
-  - port: 6666
+  - name: port1
     protocol: TCP
-    targetPort: 6666
+    port: 9411
     nodePort: 30666
   selector:
     run: zipkin-service
@@ -30,8 +30,11 @@ spec:
       containers:
       - name: zipkin-service
         image: art.local:8081/docker/notebook-microservices-k8s/zipkin-service:latest
+        env:
+          - name: zipkin-server
+            value: "192.168.99.100"
         ports:
-        - containerPort: 6666
+        - containerPort: 9411
           protocol: TCP
       imagePullSecrets:
       - name: regcred-local
