@@ -8,8 +8,8 @@ spec:
   ports:
   - name: port1
     protocol: TCP
-    port: 9411
-    nodePort: 30666
+    port: 30411
+    nodePort: 30411
   selector:
     run: zipkin-service
   type: NodePort
@@ -33,8 +33,10 @@ spec:
         env:
           - name: zipkin-server
             value: "192.168.99.100"
+          - name: zipkin-server-port
+            value: "30411"
         ports:
-        - containerPort: 9411
+        - containerPort: 30411
           protocol: TCP
       imagePullSecrets:
       - name: regcred-local
