@@ -8,7 +8,7 @@ spec:
   ports:
   - name: port1
     protocol: TCP
-    port: 30411
+    port: 9411
     nodePort: 30411
   selector:
     run: zipkin-service
@@ -31,12 +31,12 @@ spec:
       - name: zipkin-service
         image: art.local:8081/docker/notebook-microservices-k8s/zipkin-service:latest
         env:
-          - name: zipkin-server
+          - name: ZIPKIN_SERVER
             value: "192.168.99.100"
-          - name: zipkin-server-port
+          - name: ZIPKIN_SERVER_PORT
             value: "30411"
         ports:
-        - containerPort: 30411
+        - containerPort: 9411
           protocol: TCP
       imagePullSecrets:
       - name: regcred-local

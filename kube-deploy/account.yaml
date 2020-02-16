@@ -30,6 +30,11 @@ spec:
       containers:
       - name: account-service
         image: art.local:8081/docker/notebook-microservices-k8s/account-service:latest
+        env:
+          - name: ZIPKIN_SERVER
+            value: "192.168.99.100"
+          - name: ZIPKIN_SERVER_PORT
+            value: "30411"
         ports:
         - containerPort: 2222
           protocol: TCP
