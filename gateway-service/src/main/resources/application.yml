@@ -17,7 +17,10 @@ zuul:
       serviceId: account-service
     customer: 
       path: /customer/**
-      serviceId: customer-service          
+      serviceId: customer-service
+  ribbon:
+    eager-load:
+      enabled: true
 
 ribbon:
   eureka:

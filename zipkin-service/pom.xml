@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.wangqing</groupId>
-		<artifactId>notebook-microservices-k8s</artifactId>
+		<artifactId>Guestbook-microservices-k8s</artifactId>
 		<version>1.0</version>
 	</parent>
 	<artifactId>zipkin-service</artifactId>

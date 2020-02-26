@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.wangqing</groupId>
-    <artifactId>notebook-microservices-k8s</artifactId>
+    <artifactId>Guestbook-microservices-k8s</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
 
@@ -23,7 +23,6 @@
         <module>account-service</module>
         <module>gateway-service</module>
         <module>customer-service</module>
-        <module>notebook-service</module>
         <module>zipkin-service</module>
         <module>config-service</module>
     </modules>
