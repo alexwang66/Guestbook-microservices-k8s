@@ -3,4 +3,4 @@ server:
 
 spring:
   application:
-    name: my-zipkin-server
+    name: zipkin-server
