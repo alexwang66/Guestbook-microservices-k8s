@@ -7,8 +7,7 @@ kubectl delete -f kube-deploy/zipkin.yaml
 
 cd discovery
 ./buildAndPushImage.sh
-cd ../gateway-service
-./buildAndPushImage.sh
+
 #
 cd ./account-service/
 ./buildAndPushImage.sh

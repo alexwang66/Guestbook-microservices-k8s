@@ -1,6 +1,7 @@
-info:
-  component: Edge Server
-  
+spring:
+  application:
+    name: gateway-server
+
 endpoints:
   restart:
     enabled: true
