@@ -23,6 +23,6 @@
         <module>account-service</module>
         <module>gateway-service</module>
         <module>zipkin-service</module>
-        <module>config-service</module>
+<!--        <module>config-service</module>-->
     </modules>
 </project>
