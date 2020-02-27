@@ -10,8 +10,8 @@ spring:
     level:
       org.springframework: WARN
       org.hibernate: WARN
-  zipkin:
-    base-url: http://${ZIPKIN_SERVER}:${ZIPKIN_SERVER_PORT}
+#  zipkin:
+#    base-url: http://${ZIPKIN_SERVER}:${ZIPKIN_SERVER_PORT}
 
 eureka:
   client:
