@@ -1,28 +1,32 @@
-***
-环境准备：
----
-• 配置本地 Docker 镜像中心 JFrog Container Registry 
-	
-	mkdir -p $JFROG_HOME/jcr/var/etc/
-	cd $JFROG_HOME/jcr/var/etc/
-	touch ./system.yaml
-	chown -R 1030:1030 $JFROG_HOME/jcr/var
-	
-	docker run --name artifactory-jcr  -v $JFROG_HOME/jcr/var:/var/opt/jfrog/artifactory -p 8081:8081 -p 8082:8082 docker.bintray.io/jfrog/artifactory-jcr:latest
-		○ 登录
-			§ docker login art.local:8081 -uadmin -ppassw0rd
 
-企业用户推荐使用 JFrog Artifactory 企业版		
-	
-***	
-	
-	• 增加 Jira 链接到 Jenkins Build
-		○ git commit -a -m"CIC-5 fix pom"
-		○ https://wiki.jenkins.io/display/JENKINS/JIRA+Plugin
-	• Helm
-		○ 启动
-			§ Helm init
-	
+# 开发者环境：			
+
+## 配置本地开发环境Idea
+
+@TODO
+
+
+# 配置系统环境变量
+
+在/etc/hosts 添加：
+127.0.0.1  localhost config registry zipkin-server
+
+
+
+## 本地运行 Java 项目	
+在代码根目录中执行./runAll.sh
+
+|  微服务   | 访问路径  |
+|  ----  | ----  |
+| Discovery Service | localhost:8761 |
+| Account service  | localhost:2222 |
+| Gateway service  | localhost:8761 |
+| Zipkin service  | localhost:9411 |
+
+
+# GuestBook 微服务
+## 项目介绍
+
 	
 	
 	• 微服务
@@ -31,12 +35,8 @@
 			§ http://localhost:8888/application-native.yml
 			§ http://localhost:8888/application-native/auth-service.yml
 		○ Docker
-			§ 构建 Docker 镜像
-				□ docker build -t art.local:8081/docker-local/notebook-microservices-k8s/notebook-service:latest .
-			§ 推送镜像
-				□  docker push art.local:8081/docker-local/notebook-microservices-k8s/notebook-service:latest
-				
-		○ Notebook
+					
+		○ Guestbook
 			§ http://localhost:8765/actuator/routes/details/
 		○ Gateway service
 			§ http://localhost:8765/api/account/
@@ -44,7 +44,45 @@
 			§ http://localhost:9411/traces/6279bf32d894731f?serviceName=account-service
 		○ YAML
 			§ 通过${ZIPKIN_SERVER}引用本地系统变量~/.bash_profile
-	• Kubernetes
+
+# Kubernetes 运行项目
+
+## 配置免费本地 Docker 镜像中心 JFrog Container Registry 
+	
+1. 创建$JFROG_HOME环境变量。
+    
+    `export $JFROG_HOME=/Users/yourUser/.jfrog/JFROG_HOME`
+2. 创建 JCR 工作目录	
+```
+    mkdir -p $JFROG_HOME/jcr/var/etc/
+    cd $JFROG_HOME/jcr/var/etc/
+    touch ./system.yaml
+    chown -R 1030:1030 $JFROG_HOME/jcr/var
+	
+```
+3. 启动镜像
+
+    `docker run --name artifactory-jcr  -v $JFROG_HOME/jcr/var:/var/opt/jfrog/artifactory -p 8081:8081 -p 8082:8082 docker.bintray.io/jfrog/artifactory-jcr:latest`
+
+4. 登录
+	`docker login art.local:8081 -uadmin -ppassw0rd`
+
+
+注意：企业用户推荐使用 JFrog Artifactory 企业版,下载链接 wiki.jfrog.com		
+	
+
+# Docker
+```
+构建 Docker 镜像
+docker build -t art.local:8081/docker-local/notebook-microservices-k8s/notebook-service:latest .
+推送镜像
+docker push art.local:8081/docker-local/notebook-microservices-k8s/notebook-service:latest
+		
+		
+```
+# Jenkins
+
+# Kubernetes
 		○ Kubernetes镜像秘钥
 			§ kubectl create secret docker-registry regcred-local --docker-server=art.local:8081 --docker-username=admin --docker-password=passw0rd --docker-email=wq237wq@gmail.com
 		○ Minikube
