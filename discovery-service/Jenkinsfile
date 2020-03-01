@@ -53,7 +53,7 @@
             //增加sonar扫描结果到artifactory
             def jsonSlurper = new JsonSlurper()
             def issueMap = jsonSlurper.parseText(process);
-            commandText = "curl  -X PUT \"http://art.local:8081/artifactory/api/storage/libs-stage-local/org/wangqing/notebook-microservices-k8s/discovery-service/"+artifactVersion+"/discovery-service-"+artifactVersion+".jar?properties=quality.gate.sonarUrl=http://art.local:8081:9000/dashboard/index/${JOB_NAME};quality.gate.sonarIssue="+issueMap.total+"\" -uadmin:${arti_api_key}";
+            commandText = "curl  -X PUT \"http://art.local:8081/artifactory/api/storage/libs-stage-local/org/wangqing/guestbook-microservices-k8s/discovery-service/"+artifactVersion+"/discovery-service-"+artifactVersion+".jar?properties=quality.gate.sonarUrl=http://art.local:8081:9000/dashboard/index/${JOB_NAME};quality.gate.sonarIssue="+issueMap.total+"\" -uadmin:${arti_api_key}";
 
             echo commandText
             process = [ 'bash', '-c', commandText].execute().text
@@ -66,7 +66,7 @@
 
 
           echo "revisionIds : ${revisionIds}"
-          commandJira = "curl  -X PUT \"http://art.local:8081/artifactory/api/storage/libs-stage-local/org/wangqing/notebook-microservices-k8s/discovery-service/"+artifactVersion+"/discovery-service-"+artifactVersion+".jar?properties=project.issueLink=http://jira.jfrogchina.com:8081/browse/"+ requirements +";project.issues="+ requirements +"\" -uadmin:${arti_api_key}";
+          commandJira = "curl  -X PUT \"http://art.local:8081/artifactory/api/storage/libs-stage-local/org/wangqing/guestbook-microservices-k8s/discovery-service/"+artifactVersion+"/discovery-service-"+artifactVersion+".jar?properties=project.issueLink=http://jira.jfrogchina.com:8081/browse/"+ requirements +";project.issues="+ requirements +"\" -uadmin:${arti_api_key}";
           echo commandJira
           process = [ 'bash', '-c', commandJira].execute().text
 
@@ -85,7 +85,7 @@
             def xrayResults = artiServer.xrayScan xrayConfig
             echo xrayResults as String
 
-             xrayScanResultCMD = "curl  -X PUT \"http://art.local:8081/artifactory/api/storage/libs-stage-local/org/wangqing/notebook-microservices-k8s/discovery-service/"+artifactVersion+"/discovery-service-"+artifactVersion+".jar?properties=security.xray.scan=Passed;project.issues=JIEW-"+ env.BUILD_NUMBER +"\" -uadmin:${arti_api_key}";
+             xrayScanResultCMD = "curl  -X PUT \"http://art.local:8081/artifactory/api/storage/libs-stage-local/org/wangqing/guestbook-microservices-k8s/discovery-service/"+artifactVersion+"/discovery-service-"+artifactVersion+".jar?properties=security.xray.scan=Passed;project.issues=JIEW-"+ env.BUILD_NUMBER +"\" -uadmin:${arti_api_key}";
           process = [ 'bash', '-c', xrayScanResultCMD].execute().text
         }
 
@@ -106,7 +106,7 @@
             ]
             artiServer.promote promotionConfig
 
-            copyCommand = "curl -uadmin:${arti_api_key} -X POST http://art.local:8081/artifactory/api/copy/libs-stage-local/org/wangqing/notebook-microservices-k8s/discovery-service/"+artifactVersion+"/discovery-service-"+artifactVersion+".jar?to=/libs-release-local/org/wangqing/notebook-microservices-k8s/discovery-service/"+artifactVersion+"/discovery-service-"+artifactVersion+".jar"
+            copyCommand = "curl -uadmin:${arti_api_key} -X POST http://art.local:8081/artifactory/api/copy/libs-stage-local/org/wangqing/guestbook-microservices-k8s/discovery-service/"+artifactVersion+"/discovery-service-"+artifactVersion+".jar?to=/libs-release-local/org/wangqing/guestbook-microservices-k8s/discovery-service/"+artifactVersion+"/discovery-service-"+artifactVersion+".jar"
              echo copyCommand
              process = [ 'bash', '-c', copyCommand].execute().text
         }
@@ -116,7 +116,7 @@
                 def downloadSpec = """{
                  "files": [
                   {
-                   "pattern": "libs-stage-local/org/wangqing/notebook-microservices-k8s/discovery-service/"""+artifactVersion+"""/discovery-service-"""+artifactVersion+""".jar",
+                   "pattern": "libs-stage-local/org/wangqing/guestbook-microservices-k8s/discovery-service/"""+artifactVersion+"""/discovery-service-"""+artifactVersion+""".jar",
                    "target": "jar/discovery-service.jar",
                    "flat":"true"
                   }
@@ -126,8 +126,8 @@
                 artiServer.download(downloadSpec, buildInfo)
             }
             stage('Build Image and Deploy') {
-                sh 'docker build -t art.local:8081/docker/notebook-microservices-k8s/discovery-service:latest .'
-                 sh 'docker push art.local:8081/docker/notebook-microservices-k8s/discovery-service:latest'
+                sh 'docker build -t art.local:8081/docker/guestbook-microservices-k8s/discovery-service:latest .'
+                 sh 'docker push art.local:8081/docker/guestbook-microservices-k8s/discovery-service:latest'
 
 
                }

@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   rigistry: art.local:8081
-  repository: art.local:8081/docker/notebook-microservices-k8s/discovery-service
+  repository: art.local:8081/docker/guestbook-microservices-k8s/discovery-service
   tag: latest
   pullPolicy: IfNotPresent
 

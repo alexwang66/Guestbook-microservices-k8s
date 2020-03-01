@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: gateway-service
-        image: art.local:8081/docker/notebook-microservices-k8s/gateway-service:latest
+        image: art.local:8081/docker/guestbook-microservices-k8s/gateway-service:latest
         ports:
         - containerPort: 8765
           protocol: TCP

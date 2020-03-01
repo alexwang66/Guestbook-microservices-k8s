@@ -18,13 +18,13 @@ node {
 
         stage('Image') {
             dir ('account-service') {
-                def app = docker.build "art.local:8081/docker/notebook-microservices-k8s/account-service:latest"
+                def app = docker.build "art.local:8081/docker/guestbook-microservices-k8s/account-service:latest"
                 app.push()
             }
         }
 
         stage ('Run') {
-       //     docker.image("docker-release-local2.demo.jfrogchina.com/notebook-microservices-k8s/account-service:${env.version}").run('-p 2222:2222 -h account --name account --link discovery')
+       //     docker.image("docker-release-local2.demo.jfrogchina.com/guestbook-microservices-k8s/account-service:${env.version}").run('-p 2222:2222 -h account --name account --link discovery')
         }
 
         stage ('Final') {

@@ -3,7 +3,7 @@
 cd ./discovery-service/
 ./buildAndPushImage.sh
 #
-cd ./account-service/
+cd ../account-service/
 ./buildAndPushImage.sh
 
 cd ../gateway-service/
