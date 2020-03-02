@@ -6,33 +6,7 @@
 @TODO
 
 
-## 1.2配置系统环境变量
 
-在/etc/hosts 添加：
-127.0.0.1  config registry zipkin-server
-
-
-## 1.3环境变量
-增加下面环境变量到~/.bash_profile
-```
-export MYSQL_PORT=3306
-export DISCOVERY_SERVICE_PORT=8761
-export MYSQL_SERVER=127.0.0.1
-export NOTIFICATION_SERVICE_PASSWORD=password
-export STATISTICS_SERVICE_PASSWORD=password
-export ACCOUNT_SERVICE_PASSWORD=password
-export MONGODB_PASSWORD=password
-export CONFIG_SERVICE_PASSWORD=password
-export ZIPKIN_SERVER=127.0.0.1
-export ZIPKIN_SERVER_PORT=9411
-export CONFIG_SERVER=127.0.0.1
-export CONFIG_SERVER_PORT=8888
-export NOTEBOOK_SERVICE=127.0.0.1
-export NOTEBOOK_SERVICE_PORT=8080
-export ACCOUNT_SERVICE=127.0.0.1
-export ACCOUNT_SERVICE_PORT=2222
-
-```
 
 ## 1.4 本地运行 Java 项目	
 在代码根目录中执行./runAll.sh
