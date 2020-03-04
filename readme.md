@@ -5,8 +5,9 @@
 
 @TODO
 
-
-
+1.3 本地运行需要配置Host
+127.0.0.1  eureka-server
+ 
 
 ## 1.4 本地运行 Java 项目	
 在代码根目录中执行./runAll.sh
@@ -17,6 +18,7 @@
 | Account service  | http://localhost:2222 |
 | Gateway service  | http://localhost:8765/api/account/|
 | Zipkin service  | http://localhost:9411 |
+  
 
 # 部署方式 2： Kubernetes 部署
 

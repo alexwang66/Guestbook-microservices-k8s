@@ -4,7 +4,6 @@
 	<groupId>org.wangqing.guestbook-microservices-k8s</groupId>
 	<artifactId>discovery-service</artifactId>
 	<version>1.0</version>
-	<name>notebook-service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
