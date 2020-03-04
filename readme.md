@@ -70,9 +70,12 @@ Add insecure registry for minikube:
 
 
 ## 2.4 构建并推送镜像
- 在每个子项目目录下执行 ./buildAndPushImage.sh
+构建所有服务的镜像，并推送到镜像仓库：./updateImages.sh
+
 
 ## 2.5
+
+部署服务到 Kubernetes： ./runAll.sh，选择 N
 微服务访问
 ```
 http://192.168.99.100:31002/
