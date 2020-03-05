@@ -6,7 +6,8 @@
 @TODO
 
 ## 1.2 一键编译打包 Java 项目
-mvn package
+在代码根目录中执行命令：
+`mvn package`
 
 ## 1.3 本地运行 Java 项目	
 在代码根目录中执行./runAll.sh，选择 Y
@@ -17,6 +18,9 @@ mvn package
 | Account service  | http://localhost:2222 |
 | Gateway service  | http://localhost:8765/api/account/|
 | Zipkin service  | http://localhost:9411 |
+
+## 1.4 停止本地运行的 Java 项目
+在代码根目录中执行./stopAll.sh
 
 # 部署方式 2： Kubernetes 部署
 
