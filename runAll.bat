@@ -12,7 +12,6 @@ if "%env%" == "y" (
   start java -jar gateway-service/target/gateway-service.jar
   start java -jar account-service/target/account-service.jar
   start java -jar zipkin-service/target/zipkin-service-1.0.jar
-  start java -jar notebook-service/target/notebook-service-1.0.jar
 ) else (
 	if "%env%" == "n" (
 	  echo kube-deploy/discovery.yaml

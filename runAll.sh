@@ -10,7 +10,6 @@ while true; do
             nohup java -jar account-service/target/account-service.jar  &
             nohup java -jar gateway-service/target/gateway-service.jar  &
             nohup java -jar zipkin-service/target/zipkin-service-1.0.jar  &
-            nohup java -jar notebook-service/target/notebook-service-1.0.jar  &
          break;;
         [Nn]* )
             kubectl delete -f kube-deploy/discovery.yaml
