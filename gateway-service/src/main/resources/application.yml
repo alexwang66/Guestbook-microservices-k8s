@@ -13,14 +13,11 @@ endpoints:
     sensitive: false
 
 zuul:
-  prefix: /api
+  prefix: /notebook
   routes:
     account: 
-      path: /account/**
+      path: /**
       serviceId: account-service
-    customer: 
-      path: /customer/**
-      serviceId: customer-service
   ribbon:
     eager-load:
       enabled: true

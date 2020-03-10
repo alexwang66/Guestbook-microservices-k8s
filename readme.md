@@ -5,12 +5,14 @@
 
 @TODO
 
-##1.3 本地运行需要配置Host
-127.0.0.1  eureka-server
- 
 
-## 1.4 本地运行 Java 项目	
-在代码根目录中执行./runAll.sh
+## 1.2 一键编译打包 Java 项目
+在代码根目录中执行命令：
+`mvn package`
+
+## 1.3 本地运行 Java 项目	
+在代码根目录中执行./runAll.sh，选择 Y
+
 
 |  微服务   | 访问路径  |
 |  ----  | ----  |
@@ -19,6 +21,9 @@
 | Gateway service  | http://localhost:8765/api/account/|
 | Zipkin service  | http://localhost:9411 |
   
+
+## 1.4 停止本地运行的 Java 项目
+在代码根目录中执行./stopAll.sh
 
 # 部署方式 2： Kubernetes 部署
 
@@ -72,9 +77,12 @@ Add insecure registry for minikube:
 
 
 ## 2.4 构建并推送镜像
- 在每个子项目目录下执行 ./buildAndPushImage.sh
+构建所有服务的镜像，并推送到镜像仓库：./updateImages.sh
+
 
 ## 2.5
+
+部署服务到 Kubernetes： ./runAll.sh，选择 N
 微服务访问
 ```
 http://192.168.99.100:31002/

@@ -10,7 +10,17 @@ spring:
     level:
       org.springframework: WARN
       org.hibernate: WARN
-#  zipkin:
+
+  h2:
+    console:
+      enabled: true
+  jpa:
+    properties:
+      hibernate:
+        generate_statistics=true:
+        format_sql=true:show-sql=true:#  zipkin:
+
+
 #    base-url: http://${ZIPKIN_SERVER}:${ZIPKIN_SERVER_PORT}
 
 eureka:
@@ -26,3 +36,5 @@ eureka:
 ribbon:
   eureka:
     enabled: true
+
+
