@@ -1,0 +1,26 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: notebook-service
+  cloud:
+    config:
+      uri: http://${CONFIG_SERVER}:${CONFIG_SERVER_PORT}
+      fail-fast: true
+      password: ${CONFIG_SERVICE_PASSWORD}
+      username: user
+  logging:
+    pattern:
+      console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr([${springAppName:-},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-Span-Export:-}]){yellow} %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+    level:
+      org.springframework: WARN
+      org.hibernate: WARN
+#  zipkin:
+#    base-url: http://${ZIPKIN_SERVER}:${ZIPKIN_SERVER_PORT}
+
+client:
+  serviceUrl:
+    defaultZone:  ${DISCOVERY_URL:http://eureka-server:8761}/eureka/
+  instance:
+    preferIpAddress: true
