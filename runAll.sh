@@ -2,7 +2,7 @@
 
 
 while true; do
-    read -p "Run on local java environment or run on K8S?, Y=Java, N=K8S" yn
+    read -p "Run project as java app on local environment or run on K8S?, Y=Java, N=K8S" yn
     case $yn in
         [Yy]* )
             nohup java -jar discovery-service/target/discovery-service-1.0.jar  &
