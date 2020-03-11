@@ -17,7 +17,7 @@ zuul:
   routes:
     account: 
       path: /**
-      serviceId: account-service
+      serviceId: guestbook-service
   ribbon:
     eager-load:
       enabled: true

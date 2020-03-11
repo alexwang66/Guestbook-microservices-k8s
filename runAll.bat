@@ -10,7 +10,7 @@ if "%env%" == "y" (
   start java -jar discovery-service/target/discovery-service-1.0.jar
   timeout 5
   start java -jar gateway-service/target/gateway-service.jar
-  start java -jar account-service/target/account-service.jar
+  start java -jar guestbook-service/target/guestbook-service.jar
   start java -jar zipkin-service/target/zipkin-service-1.0.jar
 ) else (
 	if "%env%" == "n" (

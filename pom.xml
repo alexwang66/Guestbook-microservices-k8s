@@ -20,7 +20,7 @@
 
     <modules>
         <module>discovery-service</module>
-        <module>account-service</module>
+        <module>guestbook-service</module>
         <module>gateway-service</module>
         <module>zipkin-service</module>
 <!--        <module>notebook-service</module>-->
