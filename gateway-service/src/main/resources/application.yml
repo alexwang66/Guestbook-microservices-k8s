@@ -15,7 +15,7 @@ endpoints:
 zuul:
 #  prefix: /guestbook
   routes:
-    account: 
+    guestbook:
       path: /**
       serviceId: guestbook-service
   ribbon:

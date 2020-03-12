@@ -1,4 +1,4 @@
-package org.wangqing.microservices.account.model;
+package org.wangqing.microservices.guestbook.model;
 
 public class Account {
 

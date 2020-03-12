@@ -1,4 +1,4 @@
-package org.wangqing.microservices.account.entity;
+package org.wangqing.microservices.guestbook.entity;
 
 
 import javax.persistence.*;

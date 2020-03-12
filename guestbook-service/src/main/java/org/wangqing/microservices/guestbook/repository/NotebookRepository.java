@@ -1,8 +1,8 @@
-package org.wangqing.microservices.account.repository;
+package org.wangqing.microservices.guestbook.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import org.wangqing.microservices.account.entity.Notebook;
+import org.wangqing.microservices.guestbook.entity.Notebook;
 
 import java.util.List;
 

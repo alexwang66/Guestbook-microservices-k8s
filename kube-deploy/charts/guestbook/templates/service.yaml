@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "account.name" . }}
+  name: {{ template "guestbook.name" . }}
   labels:
-    run: {{ template "account.name" . }}
+    run: {{ template "guestbook.name" . }}
 spec:
   ports:
     - name: port2
@@ -11,7 +11,7 @@ spec:
       port: {{ .Values.service.port }}
       nodePort: {{ .Values.service.nodePort }}
   selector:
-    run: {{ template "account.name" . }}
+    run: {{ template "guestbook.name" . }}
   type: NodePort
 #apiVersion: v1
 #kind: Service

@@ -1,4 +1,4 @@
-package org.wangqing.microservices.account.model;
+package org.wangqing.microservices.guestbook.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

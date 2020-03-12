@@ -70,7 +70,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<mainClass>org.wangqing.microservices.account.Application</mainClass>
+					<mainClass>org.wangqing.microservices.guestbook.Application</mainClass>
 					<addResources>true</addResources>
 				</configuration>
 				<executions>
