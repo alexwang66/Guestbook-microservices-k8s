@@ -1,18 +1,18 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: {{ template "account.name" . }}
+  name: {{ template "guestbook.name" . }}
   labels:
-    run: {{ template "account.name" . }}
+    run: {{ template "guestbook.name" . }}
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        run: {{ template "account.name" . }}
+        run: {{ template "guestbook.name" . }}
     spec:
       containers:
-        - name: {{ template "account.name" . }}
+        - name: {{ template "guestbook.name" . }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           ports:
             - containerPort: {{ .Values.service.port }}
@@ -24,10 +24,10 @@ spec:
 #apiVersion: apps/v1beta2
 #kind: Deployment
 #metadata:
-#  name: {{ template "account.fullname" . }}
+#  name: {{ template "guestbook.fullname" . }}
 #  labels:
-#    app: {{ template "account.name" . }}
-#    chart: {{ template "account.chart" . }}
+#    app: {{ template "guestbook.name" . }}
+#    chart: {{ template "guestbook.chart" . }}
 #    release: {{ .Release.Name }}
 #    heritage: {{ .Release.Service }}
 #spec:

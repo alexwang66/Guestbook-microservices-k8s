@@ -21,7 +21,7 @@
 			<div class="card-body">
 				<div th:switch="${notebooks}" class="container my-5">
 					<p class="my-5">
-						<a href="/notebook/signup" class="btn btn-primary"><i
+						<a href="/guestbook/signup" class="btn btn-primary"><i
 							class="fas fa-user-plus ml-2"> Add Guestbook</i></a>
 					</p>
 					<div class="col-md-10">
@@ -42,10 +42,10 @@
 										<td th:text="${notebook.name}"></td>
 										<td th:text="${notebook.email}"></td>
 										<td th:text="${notebook.phoneNo}"></td>
-										<td><a th:href="@{/notebook/edit/{id}(id=${notebook.id})}"
+										<td><a th:href="@{/guestbook/edit/{id}(id=${notebook.id})}"
 											class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
 										<td><a
-											th:href="@{/notebook/delete/{id}(id=${notebook.id})}"
+											th:href="@{/guestbook/delete/{id}(id=${notebook.id})}"
 											class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
 									</tr>
 								</tbody>

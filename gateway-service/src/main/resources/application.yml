@@ -13,7 +13,7 @@ endpoints:
     sensitive: false
 
 zuul:
-#  prefix: /notebook
+#  prefix: /guestbook
   routes:
     account: 
       path: /**

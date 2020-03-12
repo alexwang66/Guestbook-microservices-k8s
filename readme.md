@@ -17,8 +17,8 @@
 |  微服务   | 访问路径  |
 |  ----  | ----  |
 | Discovery Service | http://localhost:8761 |
-| Account service  | http://localhost:2222 |
-| Gateway service  | http://localhost:8765/api/account/|
+| Guestbook service  | http://localhost:2222/guestbook/ |
+| Gateway service  | http://localhost:8765/guestbook/|
 | Zipkin service  | http://localhost:9411 |
   
 
@@ -84,10 +84,16 @@ Add insecure registry for minikube:
 
 部署服务到 Kubernetes： ./runAll.sh，选择 N
 微服务访问
-```
-http://192.168.99.100:31002/
-http://192.168.99.100:30222/
-```
+
+  
+|  微服务   | 访问路径  |
+|  ----  | ----  |
+| Discovery Service | http://minikube ip:31002 |
+| Guestbook service  | http://localhost:30222/guestbook/ |
+| Gateway service  | http://localhost:30333/guestbook/|
+| Zipkin service  | http://localhost:30411 |
+  
+
 
 			
 			
@@ -101,7 +107,7 @@ http://192.168.99.100:30222/
 			§ 启动 服务
 				□ discovery 
 					® helm install -f discovery/values.yaml discovery -n discovery
-				□ Account
+				□ Guestbook
 					® helm install -f account/values.yaml account -n account
 			§ 删除服务
 				□ helm del --purge account

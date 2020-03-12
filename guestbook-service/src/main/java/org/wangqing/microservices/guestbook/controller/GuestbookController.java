@@ -13,13 +13,13 @@ import org.wangqing.microservices.account.repository.NotebookRepository;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/notebook/")
-public class NotebookController {
+@RequestMapping("/guestbook/")
+public class GuestbookController {
 
 	private final NotebookRepository notebookRepository;
 
 	@Autowired
-	public NotebookController(NotebookRepository notebookRepository) {
+	public GuestbookController(NotebookRepository notebookRepository) {
 		this.notebookRepository = notebookRepository;
 	}
 
