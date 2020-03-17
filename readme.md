@@ -114,6 +114,8 @@ Add insecure registry for minikube:
 		○ 配置文件
 			§ Deployment.yaml 文件里设置环境变量
 
+
+#关注 JFrog
 扫码进群不迷路，获取讲师PPT
 
-![Image text](https://github.com/alexwang66/Guestbook-microservices-k8s/blob/master/images/qr.png)
+<img src="https://github.com/alexwang66/Guestbook-microservices-k8s/blob/master/images/qr.png" width="150px">
