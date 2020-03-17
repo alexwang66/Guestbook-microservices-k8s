@@ -14,11 +14,12 @@ while true; do
         [Nn]* )
             kubectl delete -f kube-deploy/discovery.yaml
             kubectl delete -f kube-deploy/gateway.yaml
-            kubectl delete -f kube-deploy/account.yaml
+            kubectl delete -f kube-deploy/guestbook.yaml
             kubectl delete -f kube-deploy/zipkin.yaml
 
-            kubectl create -f kube-deploy/config.yaml
+
             kubectl create -f kube-deploy/discovery.yaml
+            kubectl create -f kube-deploy/guestbook.yaml
             kubectl create -f kube-deploy/gateway.yaml
             kubectl create -f kube-deploy/zipkin.yaml
         exit;;
