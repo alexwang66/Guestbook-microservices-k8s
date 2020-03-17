@@ -113,3 +113,7 @@ Add insecure registry for minikube:
 				□ helm del --purge account
 		○ 配置文件
 			§ Deployment.yaml 文件里设置环境变量
+
+扫码进群不迷路，获取讲师PPT
+
+![Image text](https://github.com/alexwang66/Guestbook-microservices-k8s/blob/master/images/qr.png)
