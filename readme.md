@@ -1,10 +1,9 @@
 
 # 部署方式 1：开发者环境部署：			
 
-## 1.1配置本地开发环境Idea
+## 1.1硬件配置
 
-省略
-
+8C 16GB 机器一台，或者 2 台 4C 8G 机器。
 
 ## 1.2 一键编译打包 Java 项目
 在代码根目录中执行命令：
@@ -114,8 +113,3 @@ Add insecure registry for minikube:
 		○ 配置文件
 			§ Deployment.yaml 文件里设置环境变量
 
-
-#关注 JFrog
-扫码进群不迷路，获取讲师PPT
-
-<img src="https://github.com/alexwang66/Guestbook-microservices-k8s/blob/master/images/qr.png" width="150px">
