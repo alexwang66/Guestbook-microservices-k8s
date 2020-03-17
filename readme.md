@@ -93,23 +93,21 @@ Add insecure registry for minikube:
 | Zipkin service  | http://localhost:30411 |
   
 
-
-			
+	
 			
 			
 # Helm部署
-			§ helm install -f values.yaml ../discovery 
-			§ Package
-				□ helm package discovery 
-			§ 上传到 Artifactory
-				□ curl -uadmin:AP8N3k1u3tygcz8QeLM3Yge4n1A -T /Users/qing/Documents/code/sample-microservices-k8s/kube-deploy/charts/discovery-0.1.0.tgz "http://localhost:8081/artifactory/helm/discovery-0.1.0.tgz"
-			§ 启动 服务
-				□ discovery 
-					® helm install -f discovery/values.yaml discovery -n discovery
-				□ Guestbook
-					® helm install -f account/values.yaml account -n account
-			§ 删除服务
-				□ helm del --purge account
-		○ 配置文件
-			§ Deployment.yaml 文件里设置环境变量
+
+## 运行
+`discovery 
+ 		helm install -f discovery/values.yaml discovery -n discovery`
+
+`Guestbook
+    helm install -f account/values.yaml account -n account `
+## 打包
+	helm package discovery 
+## 上传到 Artifactory
+	curl -uadmin:AP8N3k1u3tygcz8QeLM3Yge4n1A -T /Users/qing/Documents/code/sample-microservices-k8s/kube-deploy/charts/discovery-0.1.0.tgz "http://localhost:8081/artifactory/helm/discovery-0.1.0.tgz"
+##删除Helm Chart
+	helm del --purge discovery
 

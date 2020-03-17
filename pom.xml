@@ -23,6 +23,5 @@
         <module>guestbook-service</module>
         <module>gateway-service</module>
         <module>zipkin-service</module>
-<!--        <module>notebook-service</module>-->
     </modules>
 </project>
