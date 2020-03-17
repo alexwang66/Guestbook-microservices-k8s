@@ -103,11 +103,11 @@ Add insecure registry for minikube:
  		helm install -f discovery/values.yaml discovery -n discovery`
 
 `Guestbook
-    helm install -f account/values.yaml account -n account `
+    helm install -f account/values.yaml account -n guestbook `
 ## 打包
 	helm package discovery 
 ## 上传到 Artifactory
-	curl -uadmin:AP8N3k1u3tygcz8QeLM3Yge4n1A -T /Users/qing/Documents/code/sample-microservices-k8s/kube-deploy/charts/discovery-0.1.0.tgz "http://localhost:8081/artifactory/helm/discovery-0.1.0.tgz"
-##删除Helm Chart
+	curl -uadmin:apikey -T /Users/qing/Documents/code/sample-microservices-k8s/kube-deploy/charts/discovery-0.1.0.tgz "http://localhost:8081/artifactory/helm/discovery-0.1.0.tgz"
+## 删除Helm Chart
 	helm del --purge discovery
 

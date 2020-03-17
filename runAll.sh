@@ -19,7 +19,6 @@ while true; do
 
             kubectl create -f kube-deploy/config.yaml
             kubectl create -f kube-deploy/discovery.yaml
-            kubectl create -f kube-deploy/account.yaml
             kubectl create -f kube-deploy/gateway.yaml
             kubectl create -f kube-deploy/zipkin.yaml
         exit;;
