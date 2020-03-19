@@ -16,11 +16,11 @@ if "%env%" == "y" (
 	if "%env%" == "n" (
 	  echo kube-deploy/discovery.yaml
       echo kube-deploy/gateway.yaml
-      echo kube-deploy/account.yaml
+      echo kube-deploy/questbook.yaml
       echo kube-deploy/zipkin.yaml
       echo kube-deploy/config.yaml
       echo kube-deploy/discovery.yaml
-      echo kube-deploy/account.yaml
+      echo kube-deploy/questbook.yaml
       echo kube-deploy/gateway.yamlrun
       echo kube-deploy/zipkin.yaml
 	) else (

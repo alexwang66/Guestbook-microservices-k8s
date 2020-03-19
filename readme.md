@@ -6,10 +6,23 @@
 8C 16GB 机器一台，或者 2 台 4C 8G 机器。
 
 ## 1.2 一键编译打包 Java 项目
+
+### 依赖下载，打包
 在代码根目录中执行命令：
 `mvn package`
 
+默认 mvn package 会从 maven 中央仓库进行下载，速度较慢，建议配置阿里云的 maven 仓库下载依赖。
+
 ## 1.3 本地运行 Java 项目	
+
+### 配置/etc/hosts 文件
+
+➜  ~ cat /etc/hosts
+127.0.0.1 eureka-server
+
+增加本地对 `eureka-server`域名的解析。
+
+### 本地运行
 在代码根目录中执行./runAll.sh，选择 Y
 
 
@@ -103,7 +116,7 @@ Add insecure registry for minikube:
  		helm install -f discovery/values.yaml discovery -n discovery`
 
 `Guestbook
-    helm install -f account/values.yaml account -n guestbook `
+    helm install -f questbook/values.yaml questbook -n guestbook `
 ## 打包
 	helm package discovery 
 ## 上传到 Artifactory
