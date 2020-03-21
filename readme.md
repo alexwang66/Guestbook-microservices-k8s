@@ -64,7 +64,7 @@
 	
 
 ## 2.2 启动 Minikube
-`curl-Lominikubehttp://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/releases/v0.30.0/minikube-darwin-amd64&&chmod+xminikube&&sudomvminikube/usr/local/bin/`
+`curl -Lo minikube http://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/releases/v0.30.0/minikube-darwin-amd64 && chmod+x minikube &&  sudo mv minikube/usr/local/bin/`
 
 `minikube start --cpus 4 --memory 8192`
 
@@ -72,7 +72,7 @@
 ```
 minikube ssh
 su
-sudo echo "192.168.100.178 art.local mysql-server zipkin-server" >> /etc/hosts
+sudo echo "your-artifactory-ip art.local zipkin-server" >> /etc/hosts
 docker login  art.local:8081 -uadmin -ppassw0rd
 ```
 Add insecure registry for minikube:
@@ -81,7 +81,7 @@ Add insecure registry for minikube:
 ```
 "InsecureRegistry": [
                 "10.96.0.0/12",
-                "art.local"
+                "art.local:8081"
             ],
 ```
 ## 2.3 创建Kubernetes镜像秘钥
