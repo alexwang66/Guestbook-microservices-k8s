@@ -101,9 +101,9 @@ Add insecure registry for minikube:
 |  微服务   | 访问路径  |
 |  ----  | ----  |
 | Discovery Service | http://minikube ip:31002 |
-| Guestbook service  | http://localhost:30222/guestbook/ |
-| Gateway service  | http://localhost:30333/guestbook/|
-| Zipkin service  | http://localhost:30411 |
+| Guestbook service  | http://minikube ip:30222/guestbook/ |
+| Gateway service  | http://minikube ip:30333/guestbook/|
+| Zipkin service  | http://minikube ip:30411 |
   
 
 	
