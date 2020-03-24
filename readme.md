@@ -7,8 +7,11 @@
 
 ## 1.2 一键编译打包 Java 项目
 
+下载代码：git clone https://github.com/alexwang66/Guestbook-microservices-k8s.git
+
 ### 依赖下载，打包
 在代码根目录中执行命令：
+`cd Guestbook-microservices-k8s`
 `mvn package`
 
 默认 mvn package 会从 maven 中央仓库进行下载，速度较慢，建议配置阿里云的 maven 仓库下载依赖。
@@ -64,9 +67,14 @@
 	
 
 ## 2.2 启动 Minikube
+
+
+
 `curl -Lo minikube http://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/releases/v0.30.0/minikube-darwin-amd64 && chmod+x minikube &&  sudo mv minikube/usr/local/bin/`
 
 `minikube start --cpus 4 --memory 8192`
+
+Minikube 安装细节参考：https://yq.aliyun.com/articles/221687/
 
 配置本地镜像中心域名
 ```
