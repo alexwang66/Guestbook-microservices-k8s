@@ -21,9 +21,9 @@
 ### 配置/etc/hosts 文件
 
 ➜  ~ cat /etc/hosts
-127.0.0.1 eureka-server
+127.0.0.1 eureka-server zipkin-server
 
-增加本地对 `eureka-server`域名的解析。
+增加本地对 `eureka-server`和`zipkin-server` 域名的解析。
 
 ### 本地运行
 在代码根目录中执行./runAll.sh，选择 Y
@@ -35,17 +35,19 @@
 | Guestbook service  | http://localhost:2222/guestbook/ |
 | Gateway service  | http://localhost:8765/guestbook/|
 | Zipkin service  | http://localhost:9411 |
-  
+
 
 ## 1.4 停止本地运行的 Java 项目
 在代码根目录中执行./stopAll.sh
 
+
+
 # 部署方式 2： Kubernetes 部署
 
 ## 2.1 配置免费本地 Docker 镜像中心 JFrog Container Registry 
-	
+
 1. 创建$JFROG_HOME环境变量。
-    
+  
     `export $JFROG_HOME=/Users/yourUser/.jfrog/JFROG_HOME`
 2. 创建 JCR 工作目录	
 ```
@@ -105,18 +107,18 @@ Add insecure registry for minikube:
 部署服务到 Kubernetes： ./runAll.sh，选择 N
 微服务访问
 
-  
+
 |  微服务   | 访问路径  |
 |  ----  | ----  |
 | Discovery Service | http://minikube ip:31002 |
 | Guestbook service  | http://minikube ip:30222/guestbook/ |
 | Gateway service  | http://minikube ip:30333/guestbook/|
 | Zipkin service  | http://minikube ip:30411 |
-  
 
-	
-			
-			
+
+​	
+​			
+​			
 # Helm部署
 
 ## 运行
@@ -131,4 +133,36 @@ Add insecure registry for minikube:
 	curl -uadmin:apikey -T /Users/qing/Documents/code/sample-microservices-k8s/kube-deploy/charts/discovery-0.1.0.tgz "http://localhost:8081/artifactory/helm/discovery-0.1.0.tgz"
 ## 删除Helm Chart
 	helm del --purge discovery
+
+
+
+# 部署方式 3： Docker 部署
+
+## 3.1 配置免费本地 Docker 镜像中心 JFrog Container Registry 
+
+同2.1的操作
+
+## 3.2 构建并推送镜像 
+
+同2.4的操作
+
+## 3.3 以Docker方式运行 
+
+在代码根目录中执行./runDocker.sh
+
+
+| 微服务            | 访问路径                         |
+| ----------------- | -------------------------------- |
+| Discovery Service | http://localhost:8761            |
+| Guestbook service | http://localhost:2222/guestbook/ |
+| Gateway service   | http://localhost:8765/guestbook/ |
+| Zipkin service    | http://localhost:9411            |
+
+## 3.4 停止Docker运行的项目
+
+在代码根目录中执行./stopDocker.sh
+
+
+
+
 
