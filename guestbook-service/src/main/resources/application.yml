@@ -18,10 +18,9 @@ spring:
     properties:
       hibernate:
         generate_statistics=true:
-        format_sql=true:show-sql=true:#  zipkin:
-
-
-#    base-url: http://${ZIPKIN_SERVER}:${ZIPKIN_SERVER_PORT}
+        format_sql=true:show-sql=true:
+  zipkin:
+    base-url: http://zipkin-server:9411
 
 eureka:
   client:
