@@ -10,86 +10,97 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.wangqing.microservices.guestbook.Application;
+import org.apache.log4j.Logger;
 
-/** 
-* Account Tester. 
-* 
-* @author <Authors name> 
-* @since <pre>ËÄÔÂ 7, 2020</pre> 
-* @version 1.0 
-*/
+/**
+ * Account Tester.
+ *
+ * @author <Authors name>
+ * @version 1.0
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Application.class)
 @SpringApplicationConfiguration(SpringBootApplication.class)
-public class AccountTest { 
+public class AccountTest {
+    private static Logger log = Logger.getLogger(AccountTest.class);
 
-@Before
-public void before() throws Exception { 
-} 
+    Account acc = new Account();
 
-@After
-public void after() throws Exception { 
-} 
 
-/** 
-* 
-* Method: getId() 
-* 
-*/ 
-@Test
-public void testGetId() throws Exception { 
-//TODO: Test goes here... 
-} 
+    @Before
+    public void before() throws Exception {
+    }
 
-/** 
-* 
-* Method: setId(Integer id) 
-* 
-*/ 
-@Test
-public void testSetId() throws Exception { 
-//TODO: Test goes here... 
-} 
+    @After
+    public void after() throws Exception {
+    }
 
-/** 
-* 
-* Method: getCustomerId() 
-* 
-*/ 
-@Test
-public void testGetCustomerId() throws Exception { 
-//TODO: Test goes here... 
-} 
+    /**
+     *
+     * Method: getId()
+     *
+     */
+    @Test
+    public void testGetId() throws Exception {
+        int number = 80;
+        acc.setId(number);
+        log.info(acc.getId());
+        Assert.assertTrue(acc.getId().equals(number));
+    }
 
-/** 
-* 
-* Method: setCustomerId(Integer customerId) 
-* 
-*/ 
-@Test
-public void testSetCustomerId() throws Exception { 
-//TODO: Test goes here... 
-} 
+    /**
+     *
+     * Method: setId(Integer id)
+     *
+     */
+    @Test
+    public void testSetId() throws Exception {
+        int id = 100;
+        acc.setId(id);
+        log.info(acc.getId());
+        Assert.assertTrue(acc.getId().equals(id));
 
-/** 
-* 
-* Method: getNumber() 
-* 
-*/ 
-@Test
-public void testGetNumber() throws Exception { 
-//TODO: Test goes here... 
-} 
-
-/** 
-* 
-* Method: setNumber(String number) 
-* 
-*/ 
-@Test
-public void testSetNumber() throws Exception { 
-//TODO: Test goes here... 
-} 
-
+    }
+//
+//    /**
+//     *
+//     * Method: getCustomerId()
+//     *
+//     */
+//    @Test
+//    public void testGetCustomerId() throws Exception {
+////TODO: Test goes here...
+//    }
+//
+//    /**
+//     *
+//     * Method: setCustomerId(Integer customerId)
+//     *
+//     */
+//    @Test
+//    public void testSetCustomerId() throws Exception {
+////TODO: Test goes here...
+//    }
+//
+//    /**
+//     *
+//     * Method: getNumber()
+//     *
+//     */
+//    @Test
+//    public void testGetNumber() throws Exception {
+////TODO: Test goes here...
+//    }
+//
+//    /**
+//     *
+//     * Method: setNumber(String number)
+//     *
+//     */
+//    @Test
+//    public void testSetNumber() throws Exception {
+////TODO: Test goes here...
+//    }
+//
 
 } 
