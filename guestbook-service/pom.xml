@@ -3,12 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.wangqing.guestbook-microservices-k8s</groupId>
 	<artifactId>guestbook-service</artifactId>
-	<version>1.3</version>
+	<version>1.0</version>
+
 	<parent>
 		<groupId>org.wangqing</groupId>
-		<artifactId>Guestbook-microservices-k8s</artifactId>
+		<artifactId>guestbook-microservices-k8s</artifactId>
 		<version>1.0</version>
 	</parent>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -89,6 +91,11 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.2</version>
 			</plugin>
 		</plugins>
 	</build>
