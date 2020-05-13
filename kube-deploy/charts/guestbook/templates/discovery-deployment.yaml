@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: discovery-service
+  labels:
+    run: discovery-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: discovery-service
+    spec:
+      containers:
+        - name: discovery-service
+          image: art.local:8081/docker/guestbook-microservices-k8s/discovery-service
+          ports:
+            - containerPort: 8761
+              protocol: TCP
+      imagePullSecrets:
+        - name: regcred-local
