@@ -10,7 +10,11 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
-
+- task: ArtifactoryPublishBuildInfo@1
+  inputs:
+    artifactoryService: 'artifactory'
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
 - task: ArtifactoryXrayScan@1
   inputs:
     artifactoryService: 'artifactory'
