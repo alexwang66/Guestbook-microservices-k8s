@@ -10,22 +10,7 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
-- task: ArtifactoryCollectIssues@1
-  inputs:
-    artifactoryService: 'artifactory'
-    configSource: 'taskConfiguration'
-    taskConfig: |
-      version: 1
-            issues:
-              trackerName: JIRA
-              regexp: (.+-[0-9]+)\s-\s(.+)
-              keyGroupIndex: 1
-              summaryGroupIndex: 2
-              trackerUrl: http://jira.jfrogchina.com:8081/issues
-              aggregate: true
-              aggregationStatus: RELEASED
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
+
 - task: ArtifactoryXrayScan@1
   inputs:
     artifactoryService: 'artifactory'
