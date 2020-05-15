@@ -10,37 +10,31 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+- task: ArtifactoryToolsInstaller@1
+  inputs:
+    artifactoryService: 'Artifactory-V7'
+    cliInstallationRepo: 'jfrog-cli'
+    installExtractors: true
+    extractorsInstallationRepo: 'jcenter'
 - task: ArtifactoryMaven@2
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'install'
-    artifactoryResolverService: 'artifactory'
+    artifactoryResolverService: 'Artifactory-V7'
     targetResolveReleaseRepo: 'libs-release'
     targetResolveSnapshotRepo: 'libs-snapshot'
-    artifactoryDeployService: 'artifactory'
+    artifactoryDeployService: 'Artifactory-V7'
     targetDeployReleaseRepo: 'libs-release'
     targetDeploySnapshotRepo: 'libs-snapshot'
     collectBuildInfo: true
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
     includeEnvVars: true
-- task: ArtifactoryToolsInstaller@1
-  inputs:
-    artifactoryService: 'artifactory'
-    cliInstallationRepo: 'jfrog-cli'
-    installExtractors: true
-    extractorsInstallationRepo: 'jcenter'
 - task: ArtifactoryPublishBuildInfo@1
   inputs:
-    artifactoryService: 'artifactory'
+    artifactoryService: 'Artifactory-V7'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
-- task: ArtifactoryXrayScan@1
-  inputs:
-    artifactoryService: 'artifactory'
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    allowFailBuild: true
 - script: |
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
