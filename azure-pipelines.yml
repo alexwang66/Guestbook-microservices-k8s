@@ -10,6 +10,12 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+- task: ArtifactoryToolsInstaller@1
+  inputs:
+    artifactoryService: 'artifactory'
+    cliInstallationRepo: 'jfrog-cli'
+    installExtractors: true
+    extractorsInstallationRepo: 'jcenter'
 - task: ArtifactoryPublishBuildInfo@1
   inputs:
     artifactoryService: 'artifactory'
