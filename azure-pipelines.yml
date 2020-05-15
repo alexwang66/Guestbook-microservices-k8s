@@ -10,6 +10,20 @@ pool:
 steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
+- task: ArtifactoryMaven@2
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'install'
+    artifactoryResolverService: 'artifactory'
+    targetResolveReleaseRepo: 'libs-release'
+    targetResolveSnapshotRepo: 'libs-snapshot'
+    artifactoryDeployService: 'artifactory'
+    targetDeployReleaseRepo: 'libs-release'
+    targetDeploySnapshotRepo: 'libs-snapshot'
+    collectBuildInfo: true
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    includeEnvVars: true
 - task: ArtifactoryToolsInstaller@1
   inputs:
     artifactoryService: 'artifactory'
