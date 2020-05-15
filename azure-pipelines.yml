@@ -1,4 +1,11 @@
-# Starter pipeline
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+
 - task: ArtifactoryCollectIssues@1
   inputs:
     artifactoryService: 'artifactory'
@@ -24,11 +31,6 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
-
-pool:
-  vmImage: 'ubuntu-latest'
 
 steps:
 - script: echo Hello, world!
