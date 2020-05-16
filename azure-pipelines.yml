@@ -8,8 +8,7 @@ pool:
 
 
 steps:
-- script:
-  workingDirectory: 'guestbook-service'
+
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 - task: ArtifactoryToolsInstaller@1
@@ -20,7 +19,7 @@ steps:
     extractorsInstallationRepo: 'jcenter'
 - task: ArtifactoryMaven@2
   inputs:
-    mavenPomFile: 'pom.xml'
+    mavenPomFile: 'guestbook-service/pom.xml'
     goals: 'install'
     artifactoryResolverService: 'Artifactory-V7'
     targetResolveReleaseRepo: 'libs-release'
