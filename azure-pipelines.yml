@@ -40,4 +40,4 @@ steps:
     artifactoryService: 'Artifactory-V7'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
-    allowFailBuild: true
+    allowFailBuild: false
