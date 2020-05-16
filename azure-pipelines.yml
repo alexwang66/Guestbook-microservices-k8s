@@ -35,7 +35,9 @@ steps:
     artifactoryService: 'Artifactory-V7'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: ArtifactoryXrayScan@1
+  inputs:
+    artifactoryService: 'Artifactory-V7'
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    allowFailBuild: true
