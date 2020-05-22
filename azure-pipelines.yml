@@ -42,7 +42,7 @@ steps:
     command: 'push'
     artifactoryService: 'Artifactory-V7'
     targetRepo: 'docker-local'
-    imageName: 'guestbook'
+    imageName: '/guestbook:latest'
     collectBuildInfo: true
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
