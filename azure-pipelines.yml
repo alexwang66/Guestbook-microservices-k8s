@@ -37,16 +37,6 @@ steps:
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
 
-- task: ArtifactoryDocker@1
-  inputs:
-    command: 'push'
-    artifactoryService: 'Artifactory-V7'
-    targetRepo: 'docker-local'
-    imageName: '/guestbook:latest'
-    collectBuildInfo: true
-    buildName: '$(Build.DefinitionName)'
-    buildNumber: '$(Build.BuildNumber)'
-    includeEnvVars: true
 - task: ArtifactoryXrayScan@1
   inputs:
     artifactoryService: 'Artifactory-V7'
