@@ -126,7 +126,7 @@ Add insecure registry for minikube:
  		helm install -f discovery/values.yaml discovery -n discovery`
 
 `Guestbook
-    helm install -f questbook/values.yaml questbook -n guestbook `
+    helm install -f guestbook/values.yaml guestbook -n guestbook `
 ## 打包
 	helm package discovery 
 ## 上传到 Artifactory
