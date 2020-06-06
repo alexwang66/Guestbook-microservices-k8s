@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: discovery-service
@@ -6,6 +6,9 @@ metadata:
     run: discovery-service
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      run: discovery-service
   template:
     metadata:
       labels:
@@ -13,7 +16,7 @@ spec:
     spec:
       containers:
         - name: discovery-service
-          image: art.local:8081/docker/guestbook-microservices-k8s/discovery-service
+          image: arti.local:9094/springcloud-docker-dev-local/guestbook-microservices-k8s/discovery-service
           ports:
             - containerPort: 8761
               protocol: TCP

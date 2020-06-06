@@ -14,7 +14,7 @@ spec:
     run: guestbook-service
   type: NodePort
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: guestbook-service
@@ -22,6 +22,9 @@ metadata:
     run: guestbook-service
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      run: guestbook-service
   template:
     metadata:
       labels:
@@ -29,7 +32,7 @@ spec:
     spec:
       containers:
       - name: guestbook-service
-        image: art.local:8081/docker/guestbook-microservices-k8s/guestbook-service:latest
+        image: arti.local:9094/springcloud-docker-dev-local/guestbook-microservices-k8s/guestbook-service:latest
         env:
           - name: ZIPKIN_SERVER
             value: "192.168.99.100"
@@ -39,4 +42,5 @@ spec:
         - containerPort: 2222
           protocol: TCP
       imagePullSecrets:
-      - name: regcred-local
+        - name: regcred-local
+
