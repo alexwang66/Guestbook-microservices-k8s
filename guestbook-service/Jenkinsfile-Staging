@@ -48,6 +48,11 @@ node {
         
     }
         stage('promote docker images'){
+            
+        //curl -uadmin:AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb -X PUT http://art.local:8082/artifactory/docker-staging-local/guestbook-service/3/manifest.json\?properties=StagingTest=passed
+        sh '''
+            curl  -uadmin:AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb -X PUT \"http://art.local:8082/artifactory/api/storage/docker-staging-local/guestbook-service/${BUILD_NUMBER}/manifest.json?properties=StagingTest=passed"
+        '''
              def promotionConfig = [
               'buildName'          : env.JOB_NAME,
               'buildNumber'        : env.BUILD_NUMBER,
@@ -61,10 +66,7 @@ node {
         artiServer.promote promotionConfig
         
         //retag to  latest
-        //curl -uadmin:AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb -X PUT http://art.local:8082/artifactory/docker-staging-local/guestbook-service/3/manifest.json\?properties=StagingTest=passed
-        sh '''
-            curl  -uadmin:AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb -X PUT \"http://art.local:8082/artifactory/api/storage/docker-staging-local/guestbook-service/${BUILD_NUMBER}/manifest.json?properties=StagingTest=passed"
-        '''
+        
         }
     stage('clean up k8s'){
         sh '''
