@@ -3,16 +3,13 @@ node {
    def artiServer = Artifactory.server('artifactory-pro')
    def rtDocker = Artifactory.docker server: artiServer
    def buildInfo
+   def user_apikey="AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb"
+   
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
-    //   git 'https://github.com/alexwang66/Guestbook-microservices-k8s.git'
       git branch: 'master',
         credentialsId: 'wq-github',
         url: 'https://github.com/alexwang66/Guestbook-microservices-k8s.git'
-    //   sh 'git clone https://github.com/alexwang66/notebook-k8s.git  --depth 1'
-      // Get the Maven tool.
-      // ** NOTE: This 'M3' Maven tool must be configured
-      // **       in the global configuration.
       mvnHome = tool 'maven'
    }
    stage('Maven Build') {
@@ -20,27 +17,35 @@ node {
         sh 'mvn package -Dmaven.test.skip=true'
        }
    }
-
+   
     stage('Guestbook service Docker Build') {
-
+        
       dir ('guestbook-service') {
-
+  
       tagDockerApp = "art.local:8082/docker-staging-local/guestbook-service:${env.BUILD_NUMBER}"
       docker.build(tagDockerApp,"-f Dockerfile .")
       buildInfo = rtDocker.push(tagDockerApp, "docker-staging-local", buildInfo)
         artiServer.publishBuildInfo buildInfo
       }
     }
-
-
+      
+   
   stage('Discovery service Docker Build') {
       sh '''
-        kubectl create -f kube-deploy/guestbook.yaml
+        kubectl create -f kube-deploy/guestbook.yaml 
       '''
   }
-
+  
+  stage('AutoTest'){
+      //Do automation test here
+  }
+   
   stage('Sanity check'){
          input "Does the staging environment look ok?"
+    }
+    
+    stage('Add test metadata'){
+        
     }
         stage('promote docker images'){
              def promotionConfig = [
@@ -54,10 +59,16 @@ node {
               'copy'               : true
         ]
         artiServer.promote promotionConfig
+        
+        //retag to  latest
+        //curl -uadmin:AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb -X PUT http://art.local:8082/artifactory/docker-staging-local/guestbook-service/3/manifest.json\?properties=StagingTest=passed
+        sh '''
+            curl  -uadmin:AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb -X PUT \"http://art.local:8082/artifactory/api/storage/docker-staging-local/guestbook-service/${BUILD_NUMBER}/manifest.json?properties=StagingTest=passed"
+        '''
         }
     stage('clean up k8s'){
         sh '''
-            kubectl delete -f kube-deploy/guestbook.yaml
+            kubectl delete -f kube-deploy/guestbook.yaml 
         '''
     }
 
