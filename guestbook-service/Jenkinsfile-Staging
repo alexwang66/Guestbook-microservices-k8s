@@ -32,7 +32,7 @@ node {
    
   stage('Discovery service Docker Build') {
       sh '''
-        kubectl create -f kube-deploy/guestbook.yaml -n staging
+        kubectl create -f kube-deploy/guestbook-staging.yaml -n staging
       '''
   }
   
@@ -81,7 +81,7 @@ node {
         }
     stage('clean up k8s'){
         sh '''
-            kubectl delete -f kube-deploy/guestbook.yaml -n staging
+            kubectl delete -f kube-deploy/guestbook-staging.yaml -n staging
         '''
     }
 
