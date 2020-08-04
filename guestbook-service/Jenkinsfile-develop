@@ -1,5 +1,5 @@
-node {
-   def mvnHome
+node{
+    def mvnHome
    def artiServer = Artifactory.server('artifactory-pro')
    def rtDocker = Artifactory.docker server: artiServer
    def buildInfo
@@ -20,8 +20,7 @@ node {
         sh 'mvn package -Dmaven.test.skip=true'
        }
    }
-   
-    stage('Guestbook service Docker Build') {
+   stage('Guestbook service Docker Build') {
         
       dir ('guestbook-service') {
   
@@ -31,24 +30,22 @@ node {
         artiServer.publishBuildInfo buildInfo
       }
     }
-      
-   
+    
+    
   stage('Discovery service Docker Build') {
       sh '''
-        kubectl create -f kube-deploy/guestbook.yaml -n dev
+        kubectl create -f kube-deploy/guestbook-dev.yaml -n dev
       '''
   }
    
-  stage('Sanity check'){
+    stage('Sanity check'){
          input "Does the staging environment look ok?"
     }
         
     stage('clean up k8s'){
         sh '''
-            kubectl delete -f kube-deploy/guestbook.yaml -n dev
+            kubectl delete -f kube-deploy/guestbook-dev.yaml -n dev
         '''
     }
         
-       
-
 }
