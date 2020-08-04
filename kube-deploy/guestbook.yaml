@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
       - name: guestbook-service
-        image: art.local:8081/docker/guestbook-microservices-k8s/guestbook-service:latest
+        image: art.local:8081/docker/guestbook-service:latest
         env:
           - name: ZIPKIN_SERVER
             value: "192.168.99.100"
