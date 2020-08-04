@@ -18,5 +18,9 @@ minikube start --registry-mirror=https://registry.docker-cn.com
 
 # Create Docker regisgtry secret in K8s
 
-kubectl create secret docker-registry regcred --docker-server=docker-release-local2.demo.jfrogchina.com --docker-username=admin --docker-password=<> --docker-email=test@gmail.com
-
+## dev space
+kubectl create secret docker-registry regcred-local --docker-server=art.local:8081 --docker-username=admin --docker-password=passw0rd --docker-email=wq237wq@gmail.com
+## staging space
+kubectl create secret docker-registry regcred-local --docker-server=art.local:8081 --docker-username=admin --docker-password=passw0rd --docker-email=wq237wq@gmail.com --namespace=staging
+## prod space
+kubectl create secret docker-registry regcred-local --docker-server=art.local:8081 --docker-username=admin --docker-password=passw0rd --docker-email=wq237wq@gmail.com --namespace=prod
