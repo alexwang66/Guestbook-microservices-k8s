@@ -21,7 +21,7 @@ node {
          input "Does the staging environment look ok?"
     }
         stage('tag released'){
-            def commandText = "curl  -H \"X-JFrog-Art-Api: ${user_apikey}\" -X PUT \"art.local:8082/api/storage/docker-release-local/guestbook-service/latest?properties=Released=true;\" ";
+            def commandText = "curl  -H \"X-JFrog-Art-Api: ${user_apikey}\" -X PUT \"art.local:8082/api/storage/docker-release-local/guestbook-service/latest/manifest.json?properties=Released=true;\" ";
 	        process = [ 'bash', '-c', commandText].execute().text
         }
     stage('clean up k8s'){
