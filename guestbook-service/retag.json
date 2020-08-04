@@ -1,0 +1,7 @@
+{
+  "targetRepo" : "TARGETREPO",
+  "dockerRepository" : "guestbook-service",
+  "tag" : "@",
+  "targetTag" : "latest",
+  "copy": true
+}
