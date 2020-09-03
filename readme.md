@@ -40,7 +40,10 @@
 ## 1.4 停止本地运行的 Java 项目
 在代码根目录中执行./stopAll.sh
 
-
+## 安装本地 Maven 私服 Artifactory 开源版
+创建本地目录：/artifactory-oss-618（替换成你自己的目录）
+chmod  -R 777 /artifactory-oss-618
+docker run --name artifactory-oss-6.18.1 -d -v /artifactory-oss-618:/var/opt/jfrog/artifactory  -p 8083:8081 artifactory-oss618
 
 # 部署方式 2： Kubernetes 部署
 
