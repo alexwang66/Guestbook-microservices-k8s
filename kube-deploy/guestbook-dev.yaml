@@ -22,6 +22,9 @@ metadata:
     run: guestbook-service
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      run: guestbook-service
   template:
     metadata:
       labels:
