@@ -4,3 +4,4 @@ sleep 10
 docker run --name guestbook-service -d -p 2222:2222 --link discovery-service:eureka-server --link zipkin-service:zipkin-server art.local:8081/docker-local/guestbook-microservices-k8s/guestbook-service:latest
 sleep 10
 docker run --name geteway-service -d -p 8765:8765 --link discovery-service:eureka-server --link zipkin-service:zipkin-server art.local:8081/docker-local/guestbook-microservices-k8s/gateway-service:latest
+
