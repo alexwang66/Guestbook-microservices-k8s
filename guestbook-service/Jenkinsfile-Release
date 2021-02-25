@@ -1,0 +1,33 @@
+node {
+   def mvnHome
+   def artiServer = Artifactory.server('artifactory-pro')
+   def rtDocker = Artifactory.docker server: artiServer
+   def buildInfo
+   def user_apikey="AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb"
+  
+  stage('Preparation') { // for display purposes
+      // Get some code from a GitHub repository
+      git branch: 'master',
+        credentialsId: 'wq-github',
+        url: 'https://github.com/alexwang66/Guestbook-microservices-k8s.git'
+   }
+  stage('Discovery service Docker Build') {
+      sh '''
+        kubectl create -f kube-deploy/guestbook-prod.yaml -n prod
+      '''
+  }
+   
+  stage('Sanity check'){
+         input "Does the staging environment look ok?"
+    }
+        stage('tag released'){
+            def commandText = "curl  -H \"X-JFrog-Art-Api: ${user_apikey}\" -X PUT \"art.local:8082/api/storage/docker-release-local/guestbook-service/latest/manifest.json?properties=Released=true;\" ";
+	        process = [ 'bash', '-c', commandText].execute().text
+        }
+    stage('clean up k8s'){
+        sh '''
+            kubectl delete -f kube-deploy/guestbook-prod.yaml -n prod
+        '''
+    }
+
+}

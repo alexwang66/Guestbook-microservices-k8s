@@ -1,4 +1,3 @@
-
 {
   "targetRepo" : "TARGETREPO",
   "dockerRepository" : "guestbook-service",

@@ -1,0 +1,88 @@
+node {
+   def mvnHome
+   def artiServer = Artifactory.server('artifactory-pro')
+   def rtDocker = Artifactory.docker server: artiServer
+   def buildInfo
+   def user_apikey="AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb"
+   
+   stage('Preparation') { // for display purposes
+      // Get some code from a GitHub repository
+      git branch: 'master',
+        credentialsId: 'wq-github',
+        url: 'https://github.com/alexwang66/Guestbook-microservices-k8s.git'
+      mvnHome = tool 'maven'
+   }
+   stage('Maven Build') {
+       dir ('guestbook-service') {
+        sh 'mvn package -Dmaven.test.skip=true'
+       }
+   }
+   
+    stage('Guestbook service Docker Build') {
+        
+      dir ('guestbook-service') {
+  
+      tagDockerApp = "art.local:8082/docker-staging-local/guestbook-service:${env.BUILD_NUMBER}"
+      docker.build(tagDockerApp,"-f Dockerfile .")
+      buildInfo = rtDocker.push(tagDockerApp, "docker-staging-local", buildInfo)
+        artiServer.publishBuildInfo buildInfo
+      }
+    }
+      
+   
+  stage('Discovery service Docker Build') {
+      sh '''
+        kubectl create -f kube-deploy/guestbook-staging.yaml -n staging
+      '''
+  }
+  
+  stage('AutoTest'){
+      //Do automation test here
+  }
+   
+  stage('Sanity check'){
+         input "Does the staging environment look ok?"
+    }
+    
+    stage('Add test metadata'){
+        sh '''
+            curl  -uadmin:AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb -X PUT \"http://art.local:8082/artifactory/api/storage/docker-staging-local/guestbook-service/${BUILD_NUMBER}/manifest.json?properties=APITest=passed"
+        '''
+    }
+        stage('promote docker images'){
+            
+        //curl -uadmin:AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb -X PUT http://art.local:8082/artifactory/docker-staging-local/guestbook-service/3/manifest.json\?properties=StagingTest=passed
+        sh '''
+            curl  -uadmin:AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb -X PUT \"http://art.local:8082/artifactory/api/storage/docker-staging-local/guestbook-service/${BUILD_NUMBER}/manifest.json?properties=StagingTest=passed"
+        '''
+             def promotionConfig = [
+              'buildName'          : env.JOB_NAME,
+              'buildNumber'        : env.BUILD_NUMBER,
+              'targetRepo'         : "docker-release-local",
+              'comment'            : 'App works with latest released version of gradle app, tomcat and jdk',
+              'sourceRepo'         : "docker-staging-local",
+              'status'             : 'Stagging',
+              'includeDependencies': false,
+              'copy'               : true
+        ]
+        artiServer.promote promotionConfig
+        
+        //retag to  latest
+        
+        dir ('guestbook-service') {
+                def BUILD_NUMBER = env.BUILD_NUMBER
+                sh 'sed -E "s/@/$BUILD_NUMBER/" retag.json > retag_out.json'
+                sh 'sed -E "s/TARGETREPO/docker-release-local/" retag_out.json > retaga_out.json'
+                sh 'cat retaga_out.json'
+                def commandText = "curl -H \"Content-Type: application/json\" -H \"X-JFrog-Art-Api:AKCp5fUP9CcqFNUcQoGvQWZSQerQhkGPUKfcSpiAQEKf12S5y27picmfxfqMqCiCjKmEg3UHb\" -X POST \""+artiServer.url+"/api/docker/docker-release-local/v2/promote\" -T retaga_out.json ";
+	            sh commandText
+        }
+        
+        }
+    stage('clean up k8s'){
+        sh '''
+            kubectl delete -f kube-deploy/guestbook-staging.yaml -n staging
+        '''
+    }
+
+}
