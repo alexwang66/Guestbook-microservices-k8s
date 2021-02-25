@@ -6,4 +6,4 @@
 **/.sts4-cache/*
 ../**/*
 *.out
-
+.vscode/settings.json
