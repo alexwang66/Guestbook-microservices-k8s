@@ -10,6 +10,7 @@
         <artifactId>guestbook-microservices-k8s</artifactId>
         <version>1.0</version>
     </parent>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
