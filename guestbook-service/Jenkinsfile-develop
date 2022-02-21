@@ -1,0 +1,51 @@
+node{
+    def mvnHome
+   def artiServer = Artifactory.server('artifactory-pro')
+   def rtDocker = Artifactory.docker server: artiServer
+   def buildInfo
+   stage('Preparation') { // for display purposes
+      // Get some code from a GitHub repository
+    //   git 'https://github.com/alexwang66/Guestbook-microservices-k8s.git'
+      git branch: 'develop',
+        credentialsId: 'wq-github',
+        url: 'https://github.com/alexwang66/Guestbook-microservices-k8s.git'
+    //   sh 'git clone https://github.com/alexwang66/notebook-k8s.git  --depth 1'
+      // Get the Maven tool.
+      // ** NOTE: This 'M3' Maven tool must be configured
+      // **       in the global configuration.           
+      mvnHome = tool 'maven'
+   }
+   stage('Maven Build') {
+       dir ('guestbook-service') {
+        sh 'mvn package -Dmaven.test.skip=true'
+       }
+   }
+   stage('Guestbook service Docker Build') {
+        
+      dir ('guestbook-service') {
+  
+      tagDockerApp = "art.local:8082/docker-local/guestbook-service:${env.BUILD_NUMBER}"
+      docker.build(tagDockerApp,"-f Dockerfile .")
+      buildInfo = rtDocker.push(tagDockerApp, "docker-local", buildInfo)
+        artiServer.publishBuildInfo buildInfo
+      }
+    }
+    
+    
+  stage('Discovery service Docker Build') {
+      sh '''
+        kubectl create -f kube-deploy/guestbook-dev.yaml -n dev
+      '''
+  }
+   
+    stage('Sanity check'){
+         input "Does the staging environment look ok?"
+    }
+        
+    stage('clean up k8s'){
+        sh '''
+            kubectl delete -f kube-deploy/guestbook-dev.yaml -n dev
+        '''
+    }
+        
+}

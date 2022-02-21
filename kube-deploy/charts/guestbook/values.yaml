@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  rigistry: art.local:8081
-  repository: art.local:8081/docker/guestbook-microservices-k8s/guestbook-service
+  rigistry: arti.local:9094
+  repository: arti.local:9094/springcloud-docker-dev-local/guestbook-microservices-k8s/guestbook-service
   tag: latest
   pullPolicy: IfNotPresent
 

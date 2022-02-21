@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: guestbook-service
+  labels:
+    run: guestbook-server
+spec:
+  ports:
+    - name: port2
+      protocol: TCP
+      port: 2222
+      nodePort: 30222
+  selector:
+    run: guestbook-service
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: guestbook-service
+  labels:
+    run: guestbook-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        run: guestbook-service
+    spec:
+      containers:
+      - name: guestbook-service
+        image: art.local:8081/docker-release-local/guestbook-service:latest
+        env:
+          - name: ZIPKIN_SERVER
+            value: "192.168.99.100"
+          - name: ZIPKIN_SERVER_PORT
+            value: "30411"
+        ports:
+        - containerPort: 2222
+          protocol: TCP
+      imagePullSecrets:
+      - name: regcred-local

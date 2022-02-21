@@ -4,6 +4,7 @@
 **/*.idea/
 *.tgz
 **/.sts4-cache/*
-../**/*
 *.out
-
+.vscode/settings.json
+.vscode
+.DS_Store

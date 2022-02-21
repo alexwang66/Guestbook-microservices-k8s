@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Release.Name }}
@@ -6,6 +6,9 @@ metadata:
     run: {{ .Release.Name }}
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      run: {{ .Release.Name }}
   template:
     metadata:
       labels:
@@ -14,6 +17,9 @@ spec:
       containers:
         - name: {{ .Release.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          env:
+            - name: DISCOVERY_URL
+              value: "http://discovery-service:8761/"
           ports:
             - containerPort: {{ .Values.service.port }}
               protocol: TCP

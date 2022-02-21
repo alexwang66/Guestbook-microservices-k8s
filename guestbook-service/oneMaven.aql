@@ -1,0 +1,10 @@
+items.find({
+    "repo":"IDCF-maven-release-local",
+    "name":{"$match":"guestbook-service-*.jar"},
+    "@unittest.summary.pass_rate":{"$eq":"100"},
+    "@quality.gate.sonarIssue":{"$lte":"9"},
+    "@test.approve":{"$eq":"true"}
+}).sort({
+    "$desc": ["created"]
+}).limit(1)
+
