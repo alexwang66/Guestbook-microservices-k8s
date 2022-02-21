@@ -24,24 +24,31 @@ On Linux, Mac OS X and Solaris Oracle VM VirtualBox will only allow IP addresses
 #  Virtualbox 虚拟机配置双网卡实现固定IP
 - 安装 Virtualbox
 - 新建 Virtualbox 虚拟机
+![image](https://user-images.githubusercontent.com/23203831/154903898-5c914ea4-5f9b-43aa-a053-f960916b39fd.png)
 
 
 - Virtualbox安装 CentOS
 虚拟机需要分配 2 个 CPU Core，用于运行 Kubeadm
+![image](https://user-images.githubusercontent.com/23203831/154904017-f76028bd-4f7a-431c-9b31-590c1250ce97.png)
+
 - 下载阿里云 centos7 镜像
 http://mirrors.aliyun.com/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-2009.iso
 选择下载的.iso 文件作为系统盘，启动虚拟机。
 
-
+![image](https://user-images.githubusercontent.com/23203831/154904046-3bec8b60-5e66-464b-9d40-87ba98f4481c.png)
 
 
 - 配置虚机双网卡,实现固定 IP，且能访问外网
 
 查看虚拟机网络，点击‘文件’—>‘主机网络管理器’，选择“手动配置网卡”，修改ip地址为（192.168.56.1）。
+![image](https://user-images.githubusercontent.com/23203831/154905132-6aa45898-9912-4066-aa36-d9ec43bea1bc.png)
 
 - 为虚拟机配置网卡
 网卡 1： 选择host-only网卡（注意第一个网卡选择 host-only）
+![image](https://user-images.githubusercontent.com/23203831/154905101-819f675f-f973-44f5-88c6-d5f186a835af.png)
+
 网卡 2： 选择NAT
+![image](https://user-images.githubusercontent.com/23203831/154905172-2758b0fd-bc04-4903-aaf4-63a026704f18.png)
 
 
 
