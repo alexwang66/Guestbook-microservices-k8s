@@ -33,7 +33,7 @@ jobs:
       - run: |
           # Ping the server
           jf rt ping
-          jf rt use artifactory-server
+          jf use artifactory-server
           jf mvn clean install
           jf rt bp alex-maven-build 1
 
