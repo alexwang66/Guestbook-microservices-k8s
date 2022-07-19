@@ -115,7 +115,6 @@ Add insecure registry for minikube:
 | Gateway service  | http://minikube ip:30333/guestbook/|
 | Zipkin service  | http://minikube ip:30411 |
 
-
 ​	
 ​			
 ​			
