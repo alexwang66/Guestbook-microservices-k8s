@@ -24,13 +24,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
         
       - name: Build with Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B -Dmaven.test.skip=true package --file pom.xml
       - uses: jfrog/setup-jfrog-cli@v2
         env:
           JF_ENV_1: ${{ secrets.JFROGCLI_TOKEN }}
