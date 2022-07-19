@@ -8,35 +8,38 @@ pool:
 
 
 steps:
+
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
-
-- task: ArtifactoryCollectIssues@1
+- task: ArtifactoryToolsInstaller@1
   inputs:
-    artifactoryService: 'artifactory'
-    configSource: 'taskConfiguration'
-    taskConfig: |
-      version: 1
-      issues:
-        trackerName: JIRA
-        regexp: (.+-[0-9]+)\s-\s(.+)
-        keyGroupIndex: 1
-        summaryGroupIndex: 2
-        trackerUrl: http://jira.jfrogchina.com:8081/issues
-        aggregate: true
-        aggregationStatus: RELEASED
+    artifactoryService: 'Artifactory-V7'
+    cliInstallationRepo: 'jfrog-cli'
+    installExtractors: true
+    extractorsInstallationRepo: 'jcenter'
+- task: ArtifactoryMaven@2
+  inputs:
+    mavenPomFile: 'guestbook-service/pom.xml'
+    goals: 'install'
+    artifactoryResolverService: 'Artifactory-V7'
+    targetResolveReleaseRepo: 'libs-release'
+    targetResolveSnapshotRepo: 'libs-snapshot'
+    artifactoryDeployService: 'Artifactory-V7'
+    targetDeployReleaseRepo: 'libs-release'
+    targetDeploySnapshotRepo: 'libs-snapshot'
+    collectBuildInfo: true
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
+    includeEnvVars: true
 - task: ArtifactoryPublishBuildInfo@1
   inputs:
-    artifactoryService: 'artifactory'
+    artifactoryService: 'Artifactory-V7'
     buildName: '$(Build.DefinitionName)'
     buildNumber: '$(Build.BuildNumber)'
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: ArtifactoryXrayScan@1
+  inputs:
+    artifactoryService: 'Artifactory-V7'
+    buildName: '$(Build.DefinitionName)'
+    buildNumber: '$(Build.BuildNumber)'
+    allowFailBuild: false=
