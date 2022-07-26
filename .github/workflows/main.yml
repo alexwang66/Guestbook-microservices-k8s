@@ -40,7 +40,7 @@ jobs:
           jf rt ping
           jf c use artifactory-server
           jf mvnc --repo-resolve-releases=alex-maven-virtual --server-id-resolve=artifactory-server --server-id-deploy=artifactory-server --repo-resolve-snapshots=alex-maven-virtual --repo-deploy-releases=alex-maven-virtual --repo-deploy-snapshots=alex-maven-virtual
-          jf mvn package
+          jf mvn package -f guestbook-service/pom.xml
           jf rt bp alex-maven-build 1
       - uses: actions/upload-artifact@v3
         with:
